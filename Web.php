@@ -93,7 +93,7 @@ class Lity_Web extends Lity_Application
 		// controller exists?
 		if (!file_exists(ABSPATH.'app/controllers/'.$map_to_dir.ucfirst($controller_name).'.php')) {
 			if (!empty(app()->config['404'])) {
-			    $this->route['map_to'] = $map_to_dir = '';
+			    $this->route['map_to'] = $map_to = $map_to_dir = '';
 			    $this->route['controller'] = $controller_name = app()->config['404'];
 			    $this->route['action'] = $action_name = 'index';
 			} else {
