@@ -19,7 +19,7 @@ class Lity_Helper_Validator
 											 'invalid' => "is invalid",
 											 'confirmation' => "doesn't match confirmation",
 											 #'accepted ' => "must be accepted",
-											 'empty' => "can't be empty",
+											 'empty' => "is required",
 											 'too_long' => "is too long (max is %d characters)",
 											 'too_short' => "is too short (min is %d characters)",
 											 #'taken' => "has already been taken",
@@ -131,7 +131,7 @@ class Lity_Helper_Validator
 
 		// Apply error to application
 		if (!$is_valid) {
-			error($field, ($message != "" ? $message : $field.' '.$default_message));
+			error($field, ($message != "" ? $message : 'The field \''.ucfirst($field).'\' '.$default_message));
 		}
 
 		return $is_valid;
