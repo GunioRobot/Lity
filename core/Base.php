@@ -20,9 +20,9 @@ function app()
 		return Lity_Cron::get_instance();
 	else if (MODE == 'service')
 		return Lity_Service::get_instance();
-		
+
 	return null;
-	
+
 } // app()
 
 /**
@@ -33,11 +33,11 @@ function app()
 function read_config()
 {
 	foreach (func_get_args() as $config) {
-	    $config = explode('/', $config);	    
-	    $config[] = ucfirst(array_pop($config));	    
+		$config = explode('/', $config);
+		$config[] = ucfirst(array_pop($config));
 		@require_once ABSPATH.'app/config/'.implode('/', $config).'.php';
 	}
-	
+
 } // read_config()
 
 /**
@@ -47,7 +47,7 @@ function read_config()
 function env()
 {
 	return app()->parameters['lity']['env'];
-	
+
 } // env()
 
 /**
@@ -62,7 +62,7 @@ function env()
 function router()
 {
 	return app()->router();
-	
+
 } // router()
 
 /**
@@ -81,11 +81,11 @@ function logdata($data, $warn_by_email = false)
 {
 	if (!isset(app()->config['logger']))
 		return;
-		
+
 	require_once ABSPATH.'lity/core/Logger.php';
-	
+
 	return Lity_Logger::get_instance()->output($data, $warn_by_email);
-	
+
 } // logdata()
 
 /**
@@ -169,7 +169,7 @@ function session()
 {
 	require_once ABSPATH.'lity/session/Session.php';
 	return Lity_Session::get_instance();
-	
+
 } // session()
 
 /**
@@ -301,7 +301,7 @@ function error($error_name, $error_value = null)
 function errors()
 {
 	return (isset(app()->parameters['lity']['errors']) ? app()->parameters['lity']['errors'] : array());
-	
+
 } // errors()
 
 /**
@@ -311,7 +311,7 @@ function errors()
 function errors_count()
 {
 	return (isset(app()->parameters['lity']['errors']) ? count(app()->parameters['lity']['errors']) : 0);
-	
+
 } // errors_count()
 
 /**
@@ -322,9 +322,9 @@ function has_failed()
 {
 	if (errors_count() > 0)
 		return true;
-		
+
 	return false;
-	
+
 } // has_failed()
 
 /**
@@ -346,9 +346,9 @@ function lang($lang = null)
 		app()->parameters['lity']['lang'] = $lang;
 		setlocale(LC_ALL, $lang);
 	}
-	
+
 	return isset(app()->parameters['lity']['lang']) ? app()->parameters['lity']['lang'] : 'en_US';
-	
+
 } // lang()
 
 /**
@@ -364,22 +364,16 @@ function __($language_file, $str, $place_holders = array())
 	if (!isset(app()->parameters['lity']['languages'][$language_file])) {
 		if ($keys = @include_once(ABSPATH.'app/languages/'.lang().'/'.ucfirst($language_file).".php"))
 			app()->parameters['lity']['languages'][$language_file] = $keys;
+		else
+			return __replace($str, $place_holders);
 	}
 
-	if (isset(app()->parameters['lity']['languages'][$language_file][$str]))
-		$str = app()->parameters['lity']['languages'][$language_file][$str];
+	if (!isset(app()->parameters['lity']['languages'][$language_file][$str]))
+		return __replace($str, $place_holders);
 
-	if (strstr($str, "{{")) {
-		if (preg_match_all('/{{([a-zA-Z0-9_\/]*)}}/', $str, $matchs)) {
-	    foreach ($matchs[1] as $mv) {
-				if (isset($place_holders[$mv])) {
-					$str = str_replace("{{".$mv."}}", $place_holders[$mv], $str);
-				}
-	    }
-		}
-	}
+	$str = app()->parameters['lity']['languages'][$language_file][$str];
 
-	return $str;
+	return __replace($str, $place_holders);
 
 } // __()
 
@@ -393,21 +387,41 @@ function __($language_file, $str, $place_holders = array())
 function _e($language_file, $str, $place_holders = array())
 {
 	echo __($language_file, $str, $place_holders);
-	
+
 } // _e()
+
+/**
+ * Replace place holder
+ *
+ */
+function __replace($str, $place_holders = array())
+{
+	if (strstr($str, "{{")) {
+		if (preg_match_all('/{{([a-zA-Z0-9_\/]*)}}/', $str, $matchs)) {
+	    foreach ($matchs[1] as $mv) {
+				if (isset($place_holders[$mv])) {
+					$str = str_replace("{{".$mv."}}", $place_holders[$mv], $str);
+				}
+	    }
+		}
+	}
+
+	return $str;
+
+} // __replace()
 
 /**
  * Return string depends on count
  *
  * @param string $singular Singular string
- * @param string $plurial  Plurial string 
+ * @param string $plurial  Plurial string
  * @param int    $cnt      Count
  * @return string Return $singular if $cnt <= 1 and $plurial if $cnt > 1
  */
 function _n($singular, $plural, $cnt)
 {
 	return ($cnt > 1 ? $plural : $singular);
-	
+
 } // _n()
 
 /**
@@ -424,7 +438,7 @@ function _n($singular, $plural, $cnt)
 function use_layout($layout_name)
 {
 	app()->parameters['lity']['layout'] = $layout_name;
-	
+
 } // use_layout()
 
 /**
@@ -436,7 +450,7 @@ function use_layout($layout_name)
 function use_layout_type($type)
 {
 	app()->parameters['lity']['content_type'] = $type;
-	
+
 } // use_layout_type()
 
 /**
@@ -447,7 +461,7 @@ function use_layout_type($type)
 function use_view($view_name)
 {
 	app()->parameters['lity']['view'] = $view_name;
-	
+
 } // use_view()
 
 /**
@@ -480,7 +494,7 @@ function add_css()
 {
 	foreach (func_get_args() as $cssName)
 		app()->view()->add_css($cssName);
-		
+
 } // add_css()
 
 /**
@@ -491,7 +505,7 @@ function add_js()
 {
 	foreach (func_get_args() as $jsName)
 		app()->view()->add_js($jsName);
-		
+
 } // add_js()
 
 /**
@@ -580,13 +594,13 @@ function redirect_to($destination = null)
 
 /**
  * Redirect to 404 page
- * 
+ *
  */
 function redirect_to_404()
 {
 	if (!empty(app()->config['404']))
 		redirect_to(app()->config['404']);
-	
+
 	redirect_to('');
-	
+
 } // redirect_to_404()
