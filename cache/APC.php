@@ -17,7 +17,7 @@ class Lity_Cache_Apc extends Lity_Cache
 	 * Constructor
 	 *
 	 */
-	public function __construct($host, $port)
+	public function __construct()
 	{
 		$this->set_type('apc');
 		$this->set_object(null);
@@ -189,7 +189,7 @@ class Lity_Cache_Apc extends Lity_Cache
 	public function get_instance($name)
 	{
 		if (!isset(self::$_instance[$name]))
-			self::$_instance[$name] = new self($host, $port);
+			self::$_instance[$name] = new self();
 
 		return self::$_instance[$name];
 
