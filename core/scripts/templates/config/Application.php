@@ -37,31 +37,3 @@ $config['template'] = array(
  */
 
 $config['404'] = '404';
-
-/**
- * Routes
- *
- * @see <a href="http://wibeset.com/lity/route">Route</a>
- */
-
-// Update version after every routes modification
-$route_version = '1';
-
-if (!router()->restore_from_cache($route_version)) {
-
-    // Add routes here...
-    
-    // Everything that match <urlbase>controller/action (ex: http://example.com/blog/add)
-    router()->add(':controller/:action', array());
-
-    // Everything that match <urlbase>controller (ex: http://example.com/blog)
-    router()->add(':controller', array('action' => 'index'));
-
-    // Everything else
-    router()->add('(.)', array('controller' => 'home', 'action' => 'index'));
-    
-    // Save routes to cache
-    // This prevent from routes to be recompiled at every request
-    router()->save_to_cache($route_version);
-
-}
