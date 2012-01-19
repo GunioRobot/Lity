@@ -5,7 +5,6 @@
  *
  * @author  Wibeset <support@wibeset.com>
  * @package core
- * 
  */
 
 class Lity_Router
@@ -34,16 +33,28 @@ class Lity_Router
 	 */
 	public function __construct()
 	{
+		// Get current version
+		$version = (int)filemtime(ABSPATH.'app/config/Routes.php');
+				
+		// Load cache
+		if (!$this->_restore_from_cache($version)) {
+			
+			require_once(ABSPATH.'app/config/Routes.php');
+			$this->_save_to_cache($version);
+			
+		}
+		
 	} // __construct()
 
 	/**
 	 * Get routes from cache
 	 *
+	 * @todo use default cache with namespace
 	 * @param string $version version number (ex: 1.2)
 	 * @return bool
 	 * 
 	 */
-	public function restore_from_cache($version)
+	private function _restore_from_cache($version)
 	{
 		$route_file = ABSPATH.'cache/routes.'.$version;
 		
@@ -65,7 +76,7 @@ class Lity_Router
 
 		return false;
 
-	} // restore_from_cache()
+	} // _restore_from_cache()
 	
 	/**
 	 * Save routes to cache
@@ -73,7 +84,7 @@ class Lity_Router
 	 * @param  string    $version version number (ex: 1.2)
 	 * @throws Exception Unable to open file for writing
 	 */
-	public function save_to_cache($version)
+	private function _save_to_cache($version)
 	{
 		$route_file = ABSPATH.'cache/routes.'.$version;
 		
@@ -81,7 +92,7 @@ class Lity_Router
 			throw new Exception('Unable to open '.$route_file.' for writing');
 		}
 		
-	} // save_to_cache()
+	} // _save_to_cache()
 
 	/**
 	 * Add a route
