@@ -4,12 +4,12 @@
  * 404
  *
  * Error page
- * 
+ *
  * @author your name <email>
  */
- 
+
 require_once ABSPATH.'app/controllers/Application.php';
- 
+
 class Controller_404 extends Controller_Application
 {
     /**
@@ -20,9 +20,9 @@ class Controller_404 extends Controller_Application
     public function initialize()
     {
         parent::initialize();
-        
+
     } // initialize()
-    
+
     /**
      * Index
      *
@@ -30,7 +30,7 @@ class Controller_404 extends Controller_Application
     public function index()
     {
         $this->view['title'] = '404 - My Site';
-    
+
     } // index()
-    
+
 } // Controller_404

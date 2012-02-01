@@ -50,20 +50,20 @@ class Lity_Core_Script_Project
 		//
 		echo "Creating directories...\n";
 		$this->_create_directories();
-		
+
 		//
 		echo "Creating bootstrap, .htaccess and configuration files (development, test, production and routes)...\n";
 		$this->_create_configs();
-		
-		// 
+
+		//
 		echo "Creating homepage...\n";
 		$this->_create_home();
-		
-		// 
+
+		//
 		echo "Creating default 404 page...\n";
 		$this->_create_404();
-		
-		// 
+
+		//
 		echo "You are now ready to start. Before loading homepage, take a look at ./index.php, ./.htaccess, ./app/config/Development.php and ./app/config/Routes.php.\n";
 
 	} // run()

@@ -8,7 +8,7 @@
  * @author your name <email>
  * @package Config
  */
- 
+
 /**
  * Template
  *
@@ -19,7 +19,7 @@
  * automatically_add_js  Set to true to automatically add css files that matched
  *                       'public/js/<controller>/<controller>.js' and
  *                       'public/js/<controller>/<action>.js'
- * 
+ *
  * @see <a href="http://wibeset.com/lity/views">Views</a>
  */
 
@@ -28,7 +28,7 @@ $config['template'] = array(
                             'automatically_add_css' => true,
                             'automatically_add_js' => false
                             );
-                            
+
 /**
  * 404
  *

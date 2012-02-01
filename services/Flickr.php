@@ -13,7 +13,7 @@
  *
  */
 
-class Lity_Service_Flickr 
+class Lity_Service_Flickr
 {
     /**
      * @var $_api_key
@@ -33,7 +33,7 @@ class Lity_Service_Flickr
     {
         $this->_api_key = app()->config['flickr']['api_key'];
         $this->_url = "http://api.flickr.com/services/rest/?method=flickr.%%METHOD%%&api_key=".$this->_api_key."&format=json&nojsoncallback=1&";
-        
+
     } // __construct()
 
     /**
@@ -56,7 +56,7 @@ class Lity_Service_Flickr
         $url = $call.implode('&', $args);
 
         $ch = curl_init($url);
-        
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)");
         curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -92,7 +92,7 @@ class Lity_Service_Flickr
         return $photos;
 
     } // get_recent()
-    
+
     /**
      * Search pictures on flickr.
      *
@@ -100,10 +100,10 @@ class Lity_Service_Flickr
      * @return array photos
      *
      */
-    public function search($params = array()) 
+    public function search($params = array())
     {
         $results = $this->call("photos.search", $params);
-        
+
         $photos = array();
         if (isset($results['photos']['photo'])) {
             foreach ($results['photos']['photo'] as $photo) {

@@ -19,7 +19,7 @@ class Lity_Plugin_Mail
 	 * @param string $body
 	 * @param array  $headers
 	 * @return bool success
-	 * 
+	 *
 	 */
 	public function send($to, $subject, $body, $headers = array())
 	{

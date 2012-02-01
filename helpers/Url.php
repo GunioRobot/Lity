@@ -52,7 +52,7 @@ class Lity_Helper_Url
 	public function get_domain_from_url($url)
 	{
 		return parse_url($url, PHP_URL_HOST);
-		
+
 	} // get_domain_from_url()
 
 	/**
@@ -92,28 +92,28 @@ class Lity_Helper_Url
 		return $newurl;
 
 	}	// add_version_to_file_url()
-	
+
 	/**
 	 * Versionify filename
-	 * 
+	 *
 	 * @param string $filename
 	 * @param string $urlbase
 	 * @return string File's url versionified
-	 * 
+	 *
 	 */
 	public function versionify($filename, $urlbase)
 	{
 		// get file extension
 		$ext = substr($filename, strrpos($filename, '.')+1);
-		
+
 		// get the "version" of the file, which is its last modified timestamp
 		$version = (file_exists(ABSPATH.$filename) ? filemtime(ABSPATH.$filename).'.' : '');
-		
+
 		// build the new url by inserting the version before the extension
 		$newurl = $urlbase.str_replace('.'.$ext, '.'.$version.$ext, $filename);
-		
+
 		return $newurl;
-		
+
 	} // versionify()
 
 } // Lity_Helper_Url

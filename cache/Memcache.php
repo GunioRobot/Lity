@@ -47,7 +47,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function close()
 	{
 		$this->get_object()->close();
-		
+
 	} // close()
 
 	/**
@@ -60,7 +60,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function get($name)
 	{
 		return $this->get_object()->get($name);
-		
+
 	} // get()
 
 	/**
@@ -74,7 +74,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function set($name, $data, $maxtime = 0)
 	{
 		$this->get_object()->set($name, $data, $maxtime);
-		
+
 	} // set()
 
 	/**
@@ -86,7 +86,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function delete($name)
 	{
 		return $this->get_object()->delete($name);
-		
+
 	} // delete()
 
 	/**
@@ -98,7 +98,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function clear()
 	{
 		return $this->get_object()->flush();
-		
+
 	} // clear()
 
 	/**
@@ -112,7 +112,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function increment($name, $value = 1)
 	{
 		$this->get_object()->increment($name, $value);
-		
+
 	} // increment()
 
 	/**
@@ -126,7 +126,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function decrement($name, $value = 1)
 	{
 		$this->get_object()->decrement($name, $value);
-		
+
 	} // decrement()
 
 	/**
@@ -138,7 +138,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function get_server_status()
 	{
 		return $this->get_object()->getServerStatus($this->_host, $this->_port);
-		
+
 	} // get_server_status()
 
 	/**
@@ -154,7 +154,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function get_stats($type = null, $slabid = null, $limit = 100)
 	{
 		return $this->get_object()->getStats($type, $slabid, $limit);
-		
+
 	} // get_stats()
 
 	/**
@@ -166,7 +166,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function get_version()
 	{
 		return $this->get_object()->getVersion();
-		
+
 	} // get_version()
 
 	/**
@@ -181,7 +181,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function set_compress_threshold($threshold, $min_savings = 0.2)
 	{
 		return $this->get_object()->setCompressThreshold($threshold, $min_savings);
-		
+
 	} // set_compress_treshold()
 
 	/**
@@ -191,7 +191,7 @@ class Lity_Cache_Memcache extends Lity_Cache
 	public function __destruct()
 	{
 		$this->close();
-		
+
 	} // _destruct()
 
 	/**

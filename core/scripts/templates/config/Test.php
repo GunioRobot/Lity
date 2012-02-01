@@ -6,11 +6,11 @@
  * @author your name <email>
  * @package Config
  */
- 
+
 /**
  * Urls
  */
- 
+
 $config['urlbase'] = 'http://.../';
 $config['urlcss'] = 'http://.../public/css/';
 $config['urlimg'] = 'http://.../public/img/';
@@ -31,7 +31,7 @@ $config['db'] = array(
                                          'password' => ''
                                          )
                       );
-                      
+
 /**
  * Logger
  *

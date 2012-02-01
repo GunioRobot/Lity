@@ -84,7 +84,7 @@ class Lity_Helper_Text
 	public function sanitize_sql($string)
 	{
 		return trim(addslashes(strip_tags($string)));
-		
+
 	} // sanitize_sql()
 
 	/**
@@ -105,7 +105,7 @@ class Lity_Helper_Text
 	 * @param string $text
 	 * @param int    $length
 	 * @param string $truncate_string
-	 * @param string $breakpoint 
+	 * @param string $breakpoint
 	 * @return string
 	 *
 	 */
@@ -113,7 +113,7 @@ class Lity_Helper_Text
 	{
 		//
 		if ($breakpoint != false && mb_strlen($text) > $length) {
-			$text = mb_substr($text, 0, $length);			
+			$text = mb_substr($text, 0, $length);
 			return mb_substr($text, 0, mb_strrpos($text, $breakpoint)).$truncate_string;
 		}
 		else if (mb_strlen($text) > $length) {
@@ -146,7 +146,7 @@ class Lity_Helper_Text
 	public function alphaize($text, $more = '')
 	{
 		return preg_replace('/[^a-zàâçéèêëïîôùûüÿ'.$more.']/i', '', $text);
-		
+
 	} // alphaize()
 
 	/**
@@ -160,7 +160,7 @@ class Lity_Helper_Text
 	public function alphanumize($text, $more = '')
 	{
 		return preg_replace('/[^a-zàâçéèêëïîôùûüÿ0-9'.$more.']/i', '', $text);
-		
+
 	} // alphanumize()
 
 	/**
@@ -173,7 +173,7 @@ class Lity_Helper_Text
 	public function entitize($text)
 	{
 		return htmlentities($text, ENT_QUOTES, 'UTF-8');
-		
+
 	} // entitize()
 
 	/**
@@ -204,7 +204,7 @@ class Lity_Helper_Text
 	public function to_json($data)
 	{
 		return json_encode($data);
-		
+
 	} // to_json()
 
 	/**
@@ -217,7 +217,7 @@ class Lity_Helper_Text
 	public function from_json($json, $assoc = false)
 	{
 		return json_decode($json, $assoc);
-		
+
 	} // from_json()
 
 	/**
@@ -231,13 +231,13 @@ class Lity_Helper_Text
 	{
 		$string = "";
 		$chars = "abcdefghijklmnopqrstuvwxyz1234567890";
-		
+
 		for ($i = 0; $i < $length; $i++) {
 	    $string .= $chars{rand(0, 35)};
 		}
-		
+
 		return $string;
-		
+
 	} // random_alphanum()
 
 	/**
@@ -270,7 +270,7 @@ class Lity_Helper_Text
 	{
 		$string = str_replace("\r\n", "<br />", $string);
 		$string = str_replace(array("<ul></br />", "<ol><br />", "</ul></br />", "</ol><br />", "</li><br />"), array("<ul>", "<ol>", "</ul>", "</ol>","</li>"), $string);
-		
+
 		return $string;
 
 	} // nl2br()

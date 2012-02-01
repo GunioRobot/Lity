@@ -2,11 +2,11 @@
 
 /**
  * Youtube
- * 
+ *
  * You must add the following config to app/config/application.php:
- * 
+ *
  * $config['youtube'] = array('devid' => 'your dev id');
- * 
+ *
  * @author Wibeset <support@wibeset.com>
  * @package services
  *
@@ -24,9 +24,9 @@ class Lity_Service_Youtube
 	public function get_thumbnail_from_url($url)
 	{
 		$id = helper('url')->get_value_from_querystring($url, 'v');
-		
+
 		return $this->get_thumbnail_from_id($id);
-		
+
 	} // get_thumbnail_from_url()
 
 	/**
@@ -55,10 +55,10 @@ class Lity_Service_Youtube
 
 	/**
 	 * Search videos
-	 * 
+	 *
 	 * @param string $query      search query
 	 * @param string $orderby    relevance, viewCount, published or rating
-	 * @param int    $startindex 
+	 * @param int    $startindex
 	 * @param int    $limit
 	 * @return array videos
 	 *
@@ -67,17 +67,17 @@ class Lity_Service_Youtube
 	{
 		$url = 'http://gdata.youtube.com/feeds/api/videos?alt=json&v=2&q='.urlencode($query).
 			'&strict=false&orderby='.$orderby.'&start-index='.$startindex.'&max-results='.$limit;
-		
-		return $this->_request($url);		
-		
+
+		return $this->_request($url);
+
 	} // search()
 
 	/**
 	 * Get user uploaded videos
-	 * 
-	 * @param string $username   
+	 *
+	 * @param string $username
 	 * @param string $orderby    relevance, viewCount, published or rating
-	 * @param int    $startindex 
+	 * @param int    $startindex
 	 * @param int    $limit
 	 * @return array videos
 	 *
@@ -86,17 +86,17 @@ class Lity_Service_Youtube
 	{
 		$url = 'http://gdata.youtube.com/feeds/api/users/'.$username.'/uploads?alt=json&v=2'.
 			'&strict=false&orderby='.$orderby.'&start-index='.$startindex.'&max-results='.$limit;
-		
+
 		return $this->_request($url);
-		
+
 	} // get_user_uploads()
-	
+
 	/**
 	 * Get playlist uploaded videos
-	 * 
+	 *
 	 * @param string $playlist
 	 * @param string $orderby    relevance, viewCount, published or rating
-	 * @param int    $startindex 
+	 * @param int    $startindex
 	 * @param int    $limit
 	 * @return array videos
 	 *
@@ -105,17 +105,17 @@ class Lity_Service_Youtube
 	{
 		$url = 'http://gdata.youtube.com/feeds/api/playlists/'.$playlist.'?alt=json&v=2'.
 			'&strict=false&orderby='.$orderby.'&start-index='.$startindex.'&max-results='.$limit;
-				
+
 		return $this->_request($url);
-		
+
 	} // get_playlist_uploads()
-	
+
 	/**
 	 * Sent a request..
-	 * 
-	 * @param string $url 
+	 *
+	 * @param string $url
 	 * @return array
-	 * 
+	 *
 	 */
 	private function _request($url)
 	{
@@ -127,7 +127,7 @@ class Lity_Service_Youtube
 		curl_close($ch);
 
 		return json_decode($result, true);
-		
+
 	} // _request()
-	
+
 } // Lity_Service_youtube

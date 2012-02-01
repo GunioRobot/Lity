@@ -21,7 +21,7 @@ class Lity_Cache_Html extends Lity_Cache
 		$this->set_type('file');
 		$this->set_object(plugin('file'));
 
-	} // __construct()	
+	} // __construct()
 
 	/**
 	 * Get cache
@@ -46,10 +46,10 @@ class Lity_Cache_Html extends Lity_Cache
 		return false;
 
 	} // get()
-	
+
 	/**
 	 * Do not use...
-	 * 
+	 *
 	 */
 	public function set($name, $data, $maxtime = 0)
 	{
@@ -62,12 +62,12 @@ class Lity_Cache_Html extends Lity_Cache
 	public function start()
 	{
 		ob_start();
-		
+
 	} // start()
 
 	/**
 	 * Stop
-	 * 
+	 *
 	 * @param string $name
 	 * @return string HTML
 	 *
@@ -77,7 +77,7 @@ class Lity_Cache_Html extends Lity_Cache
 		// Get buffer
 		$html = ob_get_contents();
 		ob_end_clean();
-				
+
 		$this->get_object()->set(ABSPATH.'cache/html/'.$name.'.html', true);
 		$this->get_object()->write($html, 'w+');
 
@@ -87,7 +87,7 @@ class Lity_Cache_Html extends Lity_Cache
 
 	/**
 	 * Delete cache
-	 * 
+	 *
 	 * @param string $name
 	 * @return bool success
 	 *
@@ -99,34 +99,34 @@ class Lity_Cache_Html extends Lity_Cache
 		if ($this->get_object()->exists()) {
 			return $this->get_object()->destroy();
 		}
-		
-		return false;		
+
+		return false;
 
 	} // delete()
-	
+
 	/**
 	 * Clear
-	 * 
+	 *
 	 * @return bool success
-	 * 
+	 *
 	 */
 	public function clear()
 	{
-	} // clear()	
+	} // clear()
 
 	/**
-	 * 
+	 *
 	 */
-	
+
 	protected static $_instance = null;
 
 	public function get_instance()
 	{
 		if (self::$_instance == null)
 			self::$_instance = new self();
-		
+
 		return self::$_instance;
-		
+
 	} // get_instance()
 
 } // Lity_Cache_Html

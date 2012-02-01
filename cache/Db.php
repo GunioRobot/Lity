@@ -8,13 +8,13 @@
  *
  */
 
-require_once ABSPATH."lity/cache/Cache.php";	
+require_once ABSPATH."lity/cache/Cache.php";
 
 class Lity_Cache_Db extends Lity_Cache
 {
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param string $db_config_name database config's key name
 	 *
 	 */
@@ -83,7 +83,7 @@ class Lity_Cache_Db extends Lity_Cache
 	public function delete($name)
 	{
 		return model('cache')->destroy(array('condition' => 'name = "'.$name.'"'));
-		
+
 	} // delete()
 
 	/**
@@ -95,7 +95,7 @@ class Lity_Cache_Db extends Lity_Cache
 	public function clear()
 	{
 		return model('cache')->destroy_all();
-		
+
 	} // clear()
 
 	/**

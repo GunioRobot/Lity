@@ -18,7 +18,7 @@
 <body>
 
     <h1>Welcome to my site</h1>
-    
+
     <?php echo $this->_action_content; ?>
 
 </body>

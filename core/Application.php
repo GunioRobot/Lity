@@ -129,7 +129,7 @@ class Lity_Application
 	protected function execute_router()
 	{
 		$request = router()->dispatch();
-		
+
 	} // execute_router()
 
 	/**

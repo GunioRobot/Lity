@@ -14,27 +14,27 @@ class Lity_Db_Activerecord
 	 * Database's instance
 	 */
 	private $_db;
-	
+
 	/**
 	 * Database's name
 	 */
 	private $_db_name;
-	
+
 	/**
 	 * Ids from a resultset
 	 */
 	private $_ids = array();
-	
+
 	/**
 	 * @var $_attributes
 	 */
 	private $_attributes = array();
-	
+
 	/**
 	 * Resultset as array of models
 	 */
-	private $_objs = array();	
-	
+	private $_objs = array();
+
 	/**
 	 * Resultset as array of array
 	 */
@@ -44,7 +44,7 @@ class Lity_Db_Activerecord
 	 * Query's parameters (condition, order, limit, etc)
 	 */
 	private $_parameters = array();
-	
+
 	/**
 	 * Pagination
 	 */
@@ -66,7 +66,7 @@ class Lity_Db_Activerecord
 	{
 		$this->initialize_db();
 		$this->fields = array_flip($this->fields);
-		
+
 	} // initialize()
 
 	/**
@@ -75,10 +75,10 @@ class Lity_Db_Activerecord
 	private function initialize_db()
 	{
 		$this->_db = db();
-		
-		if ($this->_db_name !== null) 
+
+		if ($this->_db_name !== null)
 			$this->_db->select_db($this->_db_name);
-		
+
 	} // initialize_db()
 
 	/**
@@ -87,83 +87,83 @@ class Lity_Db_Activerecord
 	public function clear()
 	{
 		$this->_attributes = array();
-		
+
 	} // clear()
 
 	/**
 	 * Get/set primary key (must be an auto_increment)
-	 * 
+	 *
 	 * @param  int $id
-	 * @return int 
-	 * 
+	 * @return int
+	 *
 	 */
 	public function id($id = null)
 	{
 		// Get id's name
 		$field = array_shift(array_flip($this->fields));
-		
+
 		// Set id
 		if ($id !== null)
 			$this->$field = $id;
-		
+
 		return $this->_attribute($field);
-		
+
 	} // id()
 
 	/**
 	 * Get id's name
-	 * 
+	 *
 	 * @return string id's name
-	 * 
+	 *
 	 */
 	public function id_name()
 	{
 		return array_shift(array_flip($this->fields));
-		
+
 	} // id_name()
 
 	/**
 	 * Return hash of found ids with find call.
-	 * 
+	 *
 	 * @return array $this->_ids
-	 * 
+	 *
 	 */
 	public function ids()
 	{
 		return $this->_ids;
-		
+
 	} // ids()
 
 	/**
 	 * Return string of found ids with find call.
-	 * 
+	 *
 	 * @return string ids as string
-	 * 
+	 *
 	 */
 	public function ids_to_string()
 	{
 		return implode(', ', $this->ids());
-		
+
 	} // ids_to_string()
 
 	/**
 	 * Return find results to arrays instead of objects
-	 * 
+	 *
 	 * @return array
-	 * 
+	 *
 	 */
 	public function to_array()
 	{
 		return $this->_objs_array;
-		
+
 	} // to_array()
 
 	/**
 	 * Getter
-	 * 
+	 *
 	 * @param  string $name field's name
 	 * @return string       field's value
-	 * 
+	 *
 	 */
 	public function __get($name)
 	{
@@ -179,59 +179,59 @@ class Lity_Db_Activerecord
 			return $value;
 
 		return null;
-		
+
 	} // __get()
 
 	/**
 	 * Setter
-	 * 
+	 *
 	 * @param string $name  field's name
 	 * @param string $value field's value
-	 * 
+	 *
 	 */
 	public function __set($name, $value)
 	{
 		if (isset($this->fields[$name]) || array_search($name, $this->accessors) !== false) {
-						
+
 	    $settername = 'set_'.$name;
 	    if(method_exists($this, $settername))
 	      $this->_attributes[$name] = $this->$settername($value);
 	    else
 	      $this->_attributes[$name] = $value;
 		}
-		
+
 	} // __set()
 
 	/**
 	 * Returns an array of column objects for the table associated with this class.
-	 * 
+	 *
 	 * @return array
-	 * 
+	 *
 	 */
 	public function fields()
 	{
 		return $this->fields;
-		
+
 	} // fields()
 
 	/**
 	 * Returns true if the given attribute is in the attributes hash
-	 * 
+	 *
 	 * @return bool
-	 * 
+	 *
 	 */
 	public function has_attribute($attribute)
 	{
 		if ($this->_attribute($name) !== null)
 			return true;
-		
+
 		return false;
-		
+
 	} // has_attribute()
 
 	/**
 	 * Return an attribute's value if is set
-	 * 
+	 *
 	 * @param  string $name field's name
 	 * @return string       field's value
 	 */
@@ -239,14 +239,14 @@ class Lity_Db_Activerecord
 	{
 		if (isset($this->_attributes[$name]))
 			return $this->_attributes[$name];
-		
+
 		return null;
-		
+
 	} // attribute()
 
 	/**
 	 * Returns a hash of all the attributes with their names as keys and clones of their objects as values..
-	 * 
+	 *
 	 * @param  array $attributes array of attributes to set
 	 * @return array             all fields' values
 	 */
@@ -256,14 +256,14 @@ class Lity_Db_Activerecord
 	    foreach ($attributes as $attributek => $attributev)
 	      $this->$attributek = $attributev;
 		}
-		
+
 		return $this->_attributes;
-		
+
 	} // attributes()
 
 	/**
 	 * Set attributes without passing thru setter (__set)
-	 * 
+	 *
 	 * @param array $attributes array of attributes to set
 	 */
 	private function attributes_nosetter($attributes)
@@ -271,39 +271,39 @@ class Lity_Db_Activerecord
 		foreach ($attributes as $attrk => $attrv) {
 	    $this->_attributes[$attrk] = $attrv;
 		}
-		
+
 	} // attributes_nosetter()
 
 	/**
 	 * Returns true if a connection that's accessible to this class have already been opened
-	 * 
+	 *
 	 * @return bool
-	 * 
+	 *
 	 */
 	public function is_connected()
 	{
 		return $this->_db->is_connected();
-		
+
 	} // is_connected()
 
 	/**
 	 * Return last query executed
-	 * 
+	 *
 	 * @return string query
-	 * 
+	 *
 	 */
 	public function get_query()
 	{
 		return $this->_db->get_query();
-		
+
 	} // get_query()
 
 	/**
 	 * Execute a select query
-	 * 
+	 *
 	 * @param  array  $parameters
 	 * @param  string $object_key field's name to use as array keys
-	 * @return array              array of models 
+	 * @return array              array of models
 	 */
 	public function find($parameters, $object_key = null)
 	{
@@ -317,18 +317,18 @@ class Lity_Db_Activerecord
 
 		// Create models
 		while ($attributes = $this->_db->fetch_result()) {
-			
+
 			// Initialize model
 			$class_name = get_class($this);
 	    $o = new $class_name();
 	    $o->initialize();
-			
+
 			// Set attributes into model
 			$o->attributes_nosetter($attributes);
-			
+
 			// Add id to ids
 	    $this->_ids[$o->id()] = $o->id();
-			
+
 			// Stack model into objects' array
 			if ($object_key) {
 				$this->_objs[$o->$object_key] = $o;
@@ -345,10 +345,10 @@ class Lity_Db_Activerecord
 
 	/**
 	 * Select first row that match parameters
-	 * 
+	 *
 	 * @param  array $parameters
 	 * @return array
-	 * 
+	 *
 	 */
 	public function find_first($parameters)
 	{
@@ -372,20 +372,20 @@ class Lity_Db_Activerecord
 		$o = new $class_name();
 		$o->initialize();
 		$o->attributes_nosetter($attributes);
-		
+
 		return $o;
 
 	} // find_first()
 
 	/**
 	 * Execute a custom select
-	 * 
-	 * @param  string $sql 
+	 *
+	 * @param  string $sql
 	 * @param  array  $parameters
 	 * @param  string $object_key
 	 * @return array
-	 * 
-	 */	
+	 *
+	 */
 	public function find_by_sql($sql, $parameters = array(), $object_key = null)
 	{
 		//
@@ -400,18 +400,18 @@ class Lity_Db_Activerecord
 
 		// Create models
 		while ($attributes = $this->_db->fetch_result()) {
-			
+
 			// Initialize model
 			$class_name = get_class($this);
 	    $o = new $class_name();
 	    $o->initialize();
-			
+
 			// Set attributes into model
 			$o->attributes_nosetter($attributes);
-			
+
 			// Add id to ids
 	    $this->_ids[$o->id()] = $o->id();
-			
+
 			// Stack model into objects' array
 			if ($object_key) {
 				$this->_objs[$o->$object_key] = $o;
@@ -420,7 +420,7 @@ class Lity_Db_Activerecord
 				$this->_objs[] = $o;
 				$this->_objs_array[] = $attributes;
 			}
-		}	 
+		}
 
 		return $this->_objs;
 
@@ -428,29 +428,29 @@ class Lity_Db_Activerecord
 
 	/**
 	 * Force insert into table
-	 * 
+	 *
 	 * @param  array $parameters query's parameters
 	 * @return int               inserted id
-	 * 
+	 *
 	 */
 	public function insert($parameters = array())
 	{
 		$this->created_at = time();
 		$this->updated_at = 0;
-		
+
 		$id = $this->_execute_query('insert', $parameters);
-		
+
 		return $this->id($id);
-		
+
 	} // insert()
 
 	/**
 	 * insert more than one row in one query
 	 *
 	 * @param  array $rows       each row is an array of field_name => field_value
-	 * @param  array $parameters 
-	 * @return 
-	 * 
+	 * @param  array $parameters
+	 * @return
+	 *
 	 */
 	public function insert_all($rows, $parameters = array())
 	{
@@ -458,7 +458,7 @@ class Lity_Db_Activerecord
 		$values = array();
 
 		foreach ($rows as $row) {
-			
+
 	    $rowvalues = array();
 
 	    // Stack fields & values
@@ -468,7 +468,7 @@ class Lity_Db_Activerecord
 	    }
 
 	    $values[] = implode(', ', $rowvalues);
-			
+
 		}
 
 		$parameters['fields'] = $fields;
@@ -480,9 +480,9 @@ class Lity_Db_Activerecord
 
 	/**
 	 * Insert into table from a select
-	 * 
+	 *
 	 * @todo
-	 * 
+	 *
 	 */
 	public function insert_select()
 	{
@@ -494,32 +494,32 @@ class Lity_Db_Activerecord
 	public function update()
 	{
 		$this->updated_at = time();
-		
+
 		return $this->_execute_query('update');
-		
+
 	} // update()
 
 	/**
 	 * Multiple update in one query
 	 *
 	 * @param  array $condition query's where
-	 * @return 
+	 * @return
 	 *
 	 */
 	public function update_all($condition)
 	{
 		return $this->_execute_query('update_all', array('condition' => $condition));
-		
+
 	} // update_all()
 
 	/**
 	 * Insert/Update
-	 * 
+	 *
 	 * @param  array    $parameters
 	 * @param  bool     $skip_validation set to true to skip validation
-	 * @return bool|int                  return id if saved 
+	 * @return bool|int                  return id if saved
 	 *                                   return false if not saved
-	 * 
+	 *
 	 */
 	public function save($parameters = null, $skip_validation = false)
 	{
@@ -529,7 +529,7 @@ class Lity_Db_Activerecord
 		// Before update
 		if ($this->id() > 0 && method_exists($this, "before_update")) {
 			if (!$this->before_update()) return false;
-		} 
+		}
 		// Before insert
 		else if ($this->id() === null && method_exists($this, "before_insert")) {
 			if (!$this->before_insert()) return false;
@@ -563,7 +563,7 @@ class Lity_Db_Activerecord
 		// After update
 		if ($update && method_exists($this, "after_update")) {
 			$this->after_update();
-		} 
+		}
 		// After insert
 		else if ($insert && method_exists($this, "after_insert")) {
 			$this->after_insert();
@@ -575,24 +575,24 @@ class Lity_Db_Activerecord
 
 	/**
 	 * Delete row(s)
-	 * 
+	 *
 	 * @param  array $parameters condition, etc
 	 * @return bool
 	 */
 	public function destroy($parameters = array())
 	{
 		return $this->_execute_query('destroy', $parameters);
-		
+
 	} // destroy()
-	
+
 	/**
 	 * Delete all rows
-	 * 
+	 *
 	 */
 	public function destroy_all($parameters)
 	{
 		return $this->_execute_query('destroy_all', $parameters);
-		
+
 	} // destroy_all
 
 	/**
@@ -600,8 +600,8 @@ class Lity_Db_Activerecord
 	 *
 	 * Parameter paginate must be set to true into find()/find_first()/fint_by_sql() parameters OR
 	 * call after count_by_sql()
-	 * 
-	 * @return array array('first'    => first page  
+	 *
+	 * @return array array('first'    => first page
 	 *                     'previous' => previous page
 	 *                     'next'     => next page
 	 *                     'last'     => last page
@@ -609,7 +609,7 @@ class Lity_Db_Activerecord
 	 *                     'pages'    => total of pages
 	 *                     'count'    => number of rows
 	 *                     )
-	 * 
+	 *
 	 */
 	public function pagination()
 	{
@@ -647,9 +647,9 @@ class Lity_Db_Activerecord
 
 	/**
 	 * Returns the result of an SQL statement that should only include a COUNT(*) in the SELECT part
-	 * 
+	 *
 	 * @todo
-	 * 
+	 *
 	 */
 	public function count_by_sql($sql)
 	{
@@ -661,18 +661,18 @@ class Lity_Db_Activerecord
 	public function validate()
 	{
 		return helper('validator')->validate_all($this->_attributes, $this->rules);
-		
+
 	} // validate()
 
 	/**
 	 * Process custom validate
-	 * 
-	 * This function is called on each save(). All you need to do is add a function into your model named with "validate_" and the name 
+	 *
+	 * This function is called on each save(). All you need to do is add a function into your model named with "validate_" and the name
 	 * of the field you wanna do a custom validation. For example, if you got a field named 'body', you will call your function
 	 * 'validate_body'. This function must returned a boolean.
-	 * 
-	 * @return bool 
-	 * 
+	 *
+	 * @return bool
+	 *
 	 */
 	private function _process_custom_validate()
 	{
@@ -694,9 +694,9 @@ class Lity_Db_Activerecord
 	/**
 	 * Accepts an array or string. The string is returned untouched, but the array has each value
 	 * sanitized and interpolated into the sql statement
-	 * 
+	 *
 	 * @todo
-	 * 
+	 *
 	 */
 	public function sanitize_sql()
 	{
@@ -704,9 +704,9 @@ class Lity_Db_Activerecord
 
 	/**
 	 * Set query's parameters
-	 * 
+	 *
 	 * @param array $parameters
-	 * 
+	 *
 	 */
 	private function _set_parameters($parameters)
 	{
@@ -725,17 +725,17 @@ class Lity_Db_Activerecord
 
 	/**
 	 * Build a query
-	 * 
+	 *
 	 * @param string $type find        select from query
 	 *                     find_first  select first row matching query
 	 *                     find_by_sql custom query
 	 *                     found_rows  get number of results matching last query
 	 *                     insert      insert a row
-	 *                     insert_all  insert rows 
+	 *                     insert_all  insert rows
 	 *                     update      update a row
 	 *                     update_all  update rows
 	 *                     destroy     delete row(s)
-	 * 
+	 *
 	 */
 	private function _build_query($type)
 	{
@@ -790,7 +790,7 @@ class Lity_Db_Activerecord
 	    if (!isset($this->_parameters['condition']))
 	      $this->_parameters['condition'] = $this->id_name().'='.$this->id();
 	    $query = 'delete low_priority from '.$this->table;
-	    break;			
+	    break;
 		 case 'destroy_all':
 	    $query = 'delete low_priority from '.$this->table;
 	    break;
@@ -812,17 +812,17 @@ class Lity_Db_Activerecord
 		if (isset($this->_parameters['limit'])) {
 	    $query .= ' limit '.$this->_parameters['limit'];
 		}
-		
+
 		return $query;
 
 	} // _build_query()
 
 	/**
 	 * Execute a query
-	 * 
+	 *
 	 * @param  string $type
 	 * @param  array  $parameters
-	 * @return 
+	 * @return
 	 */
 	private function _execute_query($type, $parameters = array())
 	{
@@ -858,12 +858,12 @@ class Lity_Db_Activerecord
 
 	/**
 	 * Fields and/or values as string
-	 * 
+	 *
 	 * @param  int    $mode 0 fields comma separated (ex: 'field1, field2, fieldn')
 	 *                      1 values comma separated (ex: '"value1", "value2", "valuen"')
 	 *                      2 fields=values comma separated (ex: 'field1="value1", field2="value2", fieldn="valuen"')
 	 * @return string
-	 * 
+	 *
 	 */
 	private function _implode_attributes($mode)
 	{
@@ -905,14 +905,14 @@ class Lity_Db_Activerecord
 
 /**
  * No record found exception
- * 
+ *
  */
 class no_record_found extends Exception
 {
 	public function __construct($id)
 	{
 		parent::__construct("No record found for id: ".$id, (int)$id);
-		
+
 	} // __construct()
 
 } // no_record_found

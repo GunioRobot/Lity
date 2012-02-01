@@ -31,7 +31,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- * 
+ *
  */
 
 class Lity_Service_Recaptcha
@@ -44,7 +44,7 @@ class Lity_Service_Recaptcha
 	    $this->api_server = 'http://api.recaptcha.net';
 		$this->api_secure_server = 'https://api-secure.recaptcha.net';
 		$this->verify_server = 'api-verify.recaptcha.net';
-		
+
 	} // __construct()
 
 	/**
@@ -60,9 +60,9 @@ class Lity_Service_Recaptcha
 
 		// Cut the last '&'
 		$req = substr($req,0,strlen($req)-1);
-		
+
 		return $req;
-		
+
 	} // qsencode()
 
 	/**

@@ -2,7 +2,7 @@
 
 /**
  * Cron
- * 
+ *
  * @author Wibeset <support@wibeset.com>
  * @package lity
  *
@@ -16,19 +16,19 @@ class Lity_Cron extends Lity_Application
 {
     /**
 	 * Run application
-	 * 
+	 *
 	 */
 	public function run()
 	{
 	    // run application
 		parent::run();
-				
+
 		// execute controller/action
 		$this->execute_controller();
-		
+
 		// shutdown procedure
 		$this->shutdown();
-		
+
 	} // run()
 
 	/**
@@ -55,9 +55,9 @@ class Lity_Cron extends Lity_Application
 
 		// parameters?
 		if (count($args) > 0) {
-			
+
 	    $cnt = 0;
-	    foreach ($args as $arg) {				
+	    foreach ($args as $arg) {
 				if (strpos($arg, ':')) {
 					$arg = explode(':', $arg);
 					$this->route[$arg[0]] = $arg[1];
@@ -66,14 +66,14 @@ class Lity_Cron extends Lity_Application
 					$this->route['arg'.$cnt] = $arg;
 				}
 	    }
-			
+
 		}
-		
+
 	} // initialize()
 
 	/**
 	 * Execute controller
-	 * 
+	 *
 	 */
 	protected function execute_controller()
 	{
@@ -81,7 +81,7 @@ class Lity_Cron extends Lity_Application
 
 		$controller_name = $request[0];
 		$action_name = $request[1];
-		
+
 		// controller exists?
 		if (!file_exists(ABSPATH.'app/controllers/'.ucfirst($controller_name).'.php')) {
 	    die("Controller ".$controller_name." doesn't exists!");
@@ -102,10 +102,10 @@ class Lity_Cron extends Lity_Application
 		$this->controller->{$action_name}();
 
 	} // execute_controller()
-	
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 
 	protected static $_instance = null;
@@ -114,9 +114,9 @@ class Lity_Cron extends Lity_Application
 	{
 	    if (self::$_instance == null)
 			self::$_instance = new self();
-		
+
 		return self::$_instance;
-		
+
 	} // get_instance()
 
 } // Lity_Cron

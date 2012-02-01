@@ -2,7 +2,7 @@
 
 /**
  * Image
- * 
+ *
  * @todo rotate, crop, etc
  * @author  Wibeset <support@wibeset.com>
  * @package plugins
@@ -35,16 +35,16 @@ class Lity_Plugin_Image
 	 */
 	public function create_thumbnail($source, $thumb_name, $size, $quality = 100)
 	{
-		exec('convert '.$source.' -thumbnail '.$size.' -quality '.$quality.' '.$thumb_name, $output, $success);   
+		exec('convert '.$source.' -thumbnail '.$size.' -quality '.$quality.' '.$thumb_name, $output, $success);
 		# 0 on success, 1 on error: convert to boolean.
-		return !$success;                 
-		         
+		return !$success;
+
 	} // create_thumbnail()
 
 	/**
 	 * Resize an image
-	 * 
-	 * @todo $ratio 
+	 *
+	 * @todo $ratio
 	 * @param string $source      source file including path
 	 * @param string $resize_name filename after resize
 	 * @param string $size        new size (ex: 120x90)
@@ -56,15 +56,15 @@ class Lity_Plugin_Image
 	{
 		exec('convert '.$source.' -resize '.$size.' '.$resize_name, $output, $success);
 		return $success;
-		
+
 	} // resize()
 
 	/**
 	 * Download
-	 * 
+	 *
 	 * @param string $image    image's url to download
 	 * @param string $savepath path to save image
-	 * @param string $filename image filename after download 
+	 * @param string $filename image filename after download
 	 * @return string filename
 	 *
 	 */
@@ -72,7 +72,7 @@ class Lity_Plugin_Image
 	{
 		exec('wget -w 5 -O '.$savepath.$filename.' "'.$image.'"', $output, $success);
 		return $filename;
-		
+
 	} // download()
 
 } // Lity_Plugin_Image

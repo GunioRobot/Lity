@@ -6,7 +6,7 @@
  * @see <a href="http://php.net/manual/en/function.strftime.php">PHP strftime</a>
  * @author  Wibeset <support@wibeset.com>
  * @package helpers
- * 
+ *
  */
 
 class Lity_Helper_Date
@@ -15,10 +15,10 @@ class Lity_Helper_Date
 	 * Return timestamp into words
 	 *
 	 * @see <a href="http://php.net/manual/en/function.strftime.php">PHP strftime</a>
-	 * @param  int    $timestamp 
+	 * @param  int    $timestamp
 	 * @param  string $format    default is 'Month day, Year' (ex: Nov. 29, 2006)
-	 * @return string 
-	 * 
+	 * @return string
+	 *
 	 */
 	public function time_in_words($timestamp, $format = '%b. %d, %G')
 	{
@@ -27,10 +27,10 @@ class Lity_Helper_Date
 
 	/**
 	 * Get number of time in words from $from_time to now.
-	 * 
+	 *
 	 * @param  int    $from_time timestamp
-	 * @return string 
-	 * 
+	 * @return string
+	 *
 	 */
 	public function time_ago_in_words($from_time)
 	{
@@ -62,11 +62,11 @@ class Lity_Helper_Date
 
 	/**
 	 * Get number of time from $from_time to now.
-	 * 
+	 *
 	 * @param  int $from_time timestamp
 	 * @return array elapse difference
 	 *               type   second(s), minute(s), hour(s), day(s) or week(s)
-	 * 
+	 *
 	 */
 	public function time_ago($from_time)
 	{
@@ -100,8 +100,8 @@ class Lity_Helper_Date
 	 * Extract day from a timestamp
 	 *
 	 * @param  int $timestamp
-	 * @return int 
-	 * 
+	 * @return int
+	 *
 	 */
 	public function select_day($timestamp)
 	{
@@ -113,7 +113,7 @@ class Lity_Helper_Date
 	 *
 	 * @param  int $timestamp
 	 * @return int
-	 * 
+	 *
 	 */
 	public function select_month($timestamp)
 	{
@@ -125,7 +125,7 @@ class Lity_Helper_Date
 	 *
 	 * @param  int $timestamp
 	 * @return int
-	 * 
+	 *
 	 */
 	public function select_year($timestamp)
 	{
@@ -137,7 +137,7 @@ class Lity_Helper_Date
 	 *
 	 * @param  int $timestamp
 	 * @return int
-	 * 
+	 *
 	 */
 	public function select_hour($timestamp)
 	{
@@ -149,7 +149,7 @@ class Lity_Helper_Date
 	 *
 	 * @param  int $timestamp
 	 * @return int
-	 * 
+	 *
 	 */
 	public function select_minute($timestamp)
 	{
@@ -161,7 +161,7 @@ class Lity_Helper_Date
 	 *
 	 * @param  int $timestamp
 	 * @return int
-	 * 
+	 *
 	 */
 	public function select_second($timestamp)
 	{
@@ -174,7 +174,7 @@ class Lity_Helper_Date
 	 * @param  int    $timestamp
 	 * @param  string $format    default is %B
 	 * @return string for example, 'december'
-	 * 
+	 *
 	 */
 	public function previous_month_in_word($timestamp, $format = '%B')
 	{
@@ -187,7 +187,7 @@ class Lity_Helper_Date
 	 * @param  int    $timestamp
 	 * @param  string $format    default is %B
 	 * @return string for example, 'january'
-	 * 
+	 *
 	 */
 	public function next_month_in_word($timestamp, $format = '%B')
 	{
@@ -195,18 +195,18 @@ class Lity_Helper_Date
 			return strftime($format, strtotime('+16 days', $timestamp));
 		return strftime($format, strtotime('next month', $timestamp));
 	} // next_month_in_word()
-	
+
 	/**
 	 * Get number of days from seconds
-	 * 
+	 *
 	 * @param int $seconds number of seconds
 	 * @return int Days
-	 * 
+	 *
 	 */
 	public function number_of_days($seconds)
 	{
 		return (int)($seconds / 60 / 60 / 24);
-		
+
 	} // number_of_days()
 
 } // Lity_Helper_Date

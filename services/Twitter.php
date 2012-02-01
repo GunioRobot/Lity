@@ -32,7 +32,7 @@ class Lity_Service_Twitter
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 */
 	public function __construct()
 	{
@@ -40,7 +40,7 @@ class Lity_Service_Twitter
 		curl_setopt($this->_ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($this->_ch, CURLOPT_HEADER, 0);
 		curl_setopt($this->_ch, CURLOPT_VERBOSE, 0);
-		
+
 	} // __construct()
 
 	/**
@@ -49,7 +49,7 @@ class Lity_Service_Twitter
 	public function __destruct()
 	{
 	    curl_close($this->_ch);
-	    
+
 	} // __destruct()
 
 	/**
@@ -64,7 +64,7 @@ class Lity_Service_Twitter
 	    $this->_username = $username;
 		$this->_password = $password;
 		$this->_authentication = $this->_username.':'.$this->_password;
-		
+
 	} // set_authentication()
 
 	/**
@@ -87,27 +87,27 @@ class Lity_Service_Twitter
 		return json_decode($result, true);
 
 	} // update()
-	
+
 	/**
 	 * Get a timeline
-	 * 
-	 * @param string $type 
+	 *
+	 * @param string $type
 	 * @param array  $parameters
 	 * @return array result
-	 * 
+	 *
 	 */
 	public function timeline($type = 'user', $parameters = array())
 	{
 	    $extra_url = '?';
-		foreach ($parameters as $pk => $pv) 
+		foreach ($parameters as $pk => $pv)
 			$extra_url .= $pk.'='.$pv.'&';
-	
+
 		curl_setopt($this->_ch, CURLOPT_URL, $this->_url."statuses/".$type."_timeline.json".$extra_url);
 
 		$result = curl_exec($this->_ch);
 
 		return json_decode($result, true);
-		
+
 	} // timeline()
 
 } // Lity_Service_Twitter

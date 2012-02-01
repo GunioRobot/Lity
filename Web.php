@@ -84,7 +84,7 @@ class Lity_Web extends Lity_Application
 	 */
 	protected function execute_controller()
 	{
-		// 
+		//
 		$map_to = (isset($this->route['map_to']) ? $this->route['map_to'] : '');
 		$map_to_dir = ($map_to != '' ? $map_to.'/' : '');
 		$controller_name = $this->route['controller'];
@@ -102,7 +102,7 @@ class Lity_Web extends Lity_Application
 		}
 
 		// log execution...
-		if (isset(app()->config['logger']) && isset(app()->config['logger']['core']) 
+		if (isset(app()->config['logger']) && isset(app()->config['logger']['core'])
 		    && app()->config['logger']['core'] == true) {
 		  logdata('Executing controler '.$map_to_dir.$controller_name.'/'.$action_name.' from request '.$this->route['request']);
 		}
@@ -112,7 +112,7 @@ class Lity_Web extends Lity_Application
 		$controller_class_name = 'Controller_'.($map_to != '' ? ucfirst($map_to).'_' : '').ucfirst($controller_name);
 		$this->controller = new $controller_class_name();
 		$this->controller->view = array();
-		
+
 		// action exists?
 		if (!method_exists($this->controller, $action_name)) {
 		    if (!empty(app()->config['404'])) {
@@ -216,9 +216,9 @@ class Lity_Web extends Lity_Application
 	{
 		if (self::$_instance == null)
 		  self::$_instance = new self();
-		
+
 		return self::$_instance;
-		
+
 	} // get_instance()
 
 } // Lity_Web

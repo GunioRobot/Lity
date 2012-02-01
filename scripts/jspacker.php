@@ -17,9 +17,9 @@ $out = $argv[count($argv)];
 $t1 = microtime(true);
 
 # pack files
-foreach ($argv as $js) {	
-	if ($js == $out) continue;		
-	$jscode .= file_get_contents($js);	
+foreach ($argv as $js) {
+	if ($js == $out) continue;
+	$jscode .= file_get_contents($js);
 }
 
 $packer = new JavaScriptPacker($jscode, 'Normal', true, false);

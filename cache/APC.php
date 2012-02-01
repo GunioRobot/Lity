@@ -2,14 +2,14 @@
 
 /**
  * Cache - APC
- * 
+ *
  * @see <a href="http://ca.php.net/manual/en/book.apc.php>PHP: APC</a>
  * @author Wibeset <support@wibeset.com>
  * @package cache
  *
  */
 
-require_once ABSPATH."lity/cache/Cache.php";	
+require_once ABSPATH."lity/cache/Cache.php";
 
 class Lity_Cache_Apc extends Lity_Cache
 {
@@ -34,7 +34,7 @@ class Lity_Cache_Apc extends Lity_Cache
 	public function get($name)
 	{
 		return apc_fetch($name);
-		
+
 	} // get()
 
 	/**
@@ -48,7 +48,7 @@ class Lity_Cache_Apc extends Lity_Cache
 	public function set($name, $data, $maxtime = 0)
 	{
 		apc_store($name, $data, $maxtime);
-		
+
 	} // set()
 
 	/**
@@ -60,7 +60,7 @@ class Lity_Cache_Apc extends Lity_Cache
 	public function delete($name)
 	{
 		return apc_delete($name);
-		
+
 	} // delete()
 
 	/**
@@ -74,7 +74,7 @@ class Lity_Cache_Apc extends Lity_Cache
 	public function compile_file($filename)
 	{
 		return apc_compile_file($filename);
-		
+
 	} // compile_file()
 
 	/**
@@ -115,69 +115,69 @@ class Lity_Cache_Apc extends Lity_Cache
 	 *
 	 * @see <a href="http://php.net/manual/en/function.apc-cache-info.php">PHP apc_cache_info</a>
 	 * @param string $type    null, user or filehits
-	 * @param bool   $limited If limited  is TRUE, the return value will exclude the individual list of cache entries. 
-	 *                        This is useful when trying to optimize calls for statistics gathering. 
+	 * @param bool   $limited If limited  is TRUE, the return value will exclude the individual list of cache entries.
+	 *                        This is useful when trying to optimize calls for statistics gathering.
 	 * @return array data
 	 *
 	 */
 	public function info($type = null, $limited = false)
 	{
 		return apc_cache_info($type, $limited);
-		
+
 	} // info()
-	
+
 	/**
 	 * Clear
-	 * 
+	 *
 	 * @return bool success
-	 * 
+	 *
 	 */
 	public function clear()
 	{
 		return apc_clear_cache();
-		
+
 	} // clear()
-	
+
 	/**
-	 * Defines a set of constants for retrieval and mass-definition 
-	 * 
+	 * Defines a set of constants for retrieval and mass-definition
+	 *
 	 * @param string $key            The key serves as the name of the constant set being stored.
 	 * @param array  $contants       An associative array of constant_name => value  pairs.
-	 * @param bool   $case_sensitive 
+	 * @param bool   $case_sensitive
 	 * @return bool success
-	 * 
+	 *
 	 */
 	public function define_constants($key, $constants, $case_sensitive = true)
 	{
 		return apc_define_constants($key, $constants, $case_sensitive = true);
-		
+
 	} // define_constants()
-	
+
 	/**
 	 * Loads a set of constants from the cache
-	 * 
+	 *
 	 * @param string $key            The key serves as the name of the constant set being stored.
-	 * @param bool   $case_sensitive 
+	 * @param bool   $case_sensitive
 	 * @return bool success
-	 * 
+	 *
 	 */
 	public function load_constants($key, $case_sensitive = true)
 	{
 		return apc_load_constants($key, $case_sensitive = true);
-		
+
 	} // load_constants()
-	
+
 	/**
-	 * Retrieves APC's Shared Memory Allocation information 
-	 * 
-	 * @param bool $limited 
-	 * @return mixed Array of Shared Memory Allocation data; FALSE on failure. 
-	 * 
+	 * Retrieves APC's Shared Memory Allocation information
+	 *
+	 * @param bool $limited
+	 * @return mixed Array of Shared Memory Allocation data; FALSE on failure.
+	 *
 	 */
 	public function sma_info($limited = false)
 	{
 		return apc_sma_info($limited);
-		
+
 	} // sma_info();
 
 	/**

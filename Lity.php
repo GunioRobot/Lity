@@ -2,7 +2,7 @@
 
 /**
  * Lity
- * 
+ *
  * Script to initialize project, create new controllers, new models, new plugins,
  * new helpers and new services.
  *
@@ -10,7 +10,7 @@
  */
 
 define('ABSPATH', dirname(__FILE__).'/../');
- 
+
 /**
  * Show help
  *
@@ -32,7 +32,7 @@ function show_help()
        "  \t<arg2> Table's name\n\n".
        "  plugin     \t Add a new plugin\n\n".
        "  service    \t Add a new service\n\n";
-    
+
 } // show_help()
 
 if (count($argv) == 1) {
@@ -42,23 +42,23 @@ if (count($argv) == 1) {
 
 // Execute command
 switch ($argv[1]) {
-  
+
     // Initialize project
     case 'init':
         require_once ABSPATH.'lity/core/scripts/Project.php';
         $project = new Lity_Core_Script_Project();
         $project->run();
         break;
-        
+
     // Add a new model
     case 'model':
         require_once ABSPATH.'lity/core/scripts/Model.php';
         $model = new Lity_Core_Script_Model();
         $model->run($argv);
         break;
-      
+
     default:
         show_help();
         break;
-      
+
 }

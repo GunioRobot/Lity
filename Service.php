@@ -29,29 +29,29 @@ class Lity_Service extends Lity_Application
 	 *
 	 */
 	public function run()
-	{		
+	{
 	    // run application
-		parent::run();		
-		
+		parent::run();
+
 		// execute router to define route settings
 		$this->execute_router();
-		
+
 		// execute controller/action
 		$this->_result = $this->execute_controller();
-		
+
 		// output result
 		$this->output();
-		
+
 		// shutdown procedure
 		$this->shutdown();
-		
+
 	} // run()
 
 	/**
 	 * Initialize application
 	 *
 	 */
-	protected function initialize() 
+	protected function initialize()
 	{
 	    // request & format
 		$request = explode('.', REQUEST);
@@ -59,9 +59,9 @@ class Lity_Service extends Lity_Application
 		if (count($request) == 0) {
 			$request = $request[0];
 		} else {
-			if (strstr($request[1], '?')) 
+			if (strstr($request[1], '?'))
 			    $this->_format = mb_substr($request[1], 0, mb_strpos($request[1], '?'));
-			else 
+			else
 			    $this->_format = $request[1];
 			$request = $request[0];
 		}
@@ -100,19 +100,19 @@ class Lity_Service extends Lity_Application
 		// controller exists?
 		if (!file_exists(ABSPATH.'app/controllers/'.$map_to.ucfirst($controller_name).'.php')) {
 			redirect_to('');
-		}		
+		}
 
 		// log execution...
-		if (isset(app()->config['logger']) && isset(app()->config['logger']['core']) 
+		if (isset(app()->config['logger']) && isset(app()->config['logger']['core'])
 		    && app()->config['logger']['core'] == true) {
 			logdata('Executing controler '.$map_to.$controller_name.'/'.$action_name.' from request '.
 			        $this->route['request']);
 		}
 
 		//
-		require_once ABSPATH.'app/controllers/'.$map_to.ucfirst($controller_name).'.php';		
+		require_once ABSPATH.'app/controllers/'.$map_to.ucfirst($controller_name).'.php';
 		$controller_class_name = 'Controller_'.ucfirst($controller_name);
-		$this->controller = new $controller_class_name();		
+		$this->controller = new $controller_class_name();
 
 		// initialize controller
 		$this->controller->initialize();
@@ -164,9 +164,9 @@ class Lity_Service extends Lity_Application
 	{
 	    if (self::$_instance == null)
 			self::$_instance = new self();
-		
+
 		return self::$_instance;
-		
+
 	} // get_instance()
 
 } // Lity_Service

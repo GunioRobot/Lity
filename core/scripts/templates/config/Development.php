@@ -6,7 +6,7 @@
  * @author your name <email>
  * @package Config
  */
- 
+
 /**
  * Urls
  */
@@ -31,7 +31,7 @@ $config['db'] = array(
                                          'password' => ''
                                          )
                       );
-                      
+
 /**
  * Logger
  *

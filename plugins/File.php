@@ -157,7 +157,7 @@ class Lity_Plugin_File {
 	 */
 	public function create() {
 
-		$dirs = explode('/', $this->get_full_path());	 
+		$dirs = explode('/', $this->get_full_path());
 
 		if (count($dirs) > 1) {
 			array_pop($dirs);

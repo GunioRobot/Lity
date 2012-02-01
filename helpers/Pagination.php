@@ -2,20 +2,20 @@
 
 /**
  * Pagination
- * 
+ *
  */
 
 class Lity_Helper_Pagination
 {
 	/**
 	 * Return pagination as links in html format
-	 * 
+	 *
 	 * @param  array  $pagination   pagination from Activerecord
 	 * @param  string $link         page's url containing {{page}}
 	 * @param  int    $range        range before and after current page
 	 * @param  bool   $nextprevious show next/previous button
 	 * @return string pagination in html format
-	 * 
+	 *
 	 */
 	public function to_links($pagination, $url, $range = 5, $nextprevious = true)
 	{

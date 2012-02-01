@@ -8,7 +8,7 @@
  *
  */
 
-require_once ABSPATH."lity/cache/Cache.php";	
+require_once ABSPATH."lity/cache/Cache.php";
 
 class Lity_Cache_File extends Lity_Cache
 {
@@ -69,7 +69,7 @@ class Lity_Cache_File extends Lity_Cache
 
 	/**
 	 * Delete from cache
-	 * 
+	 *
 	 * @param string $name
 	 *
 	 */
@@ -80,23 +80,23 @@ class Lity_Cache_File extends Lity_Cache
 		if ($this->get_object()->exists()) {
 			return $this->get_object()->destroy();
 		}
-		
+
 		return false;
 
 	} // delete()
-	
+
 	/**
 	 * Clear
-	 * 
+	 *
 	 * @return bool success
-	 * 
+	 *
 	 */
 	public function clear()
 	{
 	} // clear()
-	
+
 	/**
-	 * 
+	 *
 	 */
 
 	protected static $_instance = null;
@@ -105,9 +105,9 @@ class Lity_Cache_File extends Lity_Cache
 	{
 		if (self::$_instance == null)
 			self::$_instance = new self();
-		
+
 		return self::$_instance;
-		
+
 	} // get_instance()
 
 } // Lity_Cache_File

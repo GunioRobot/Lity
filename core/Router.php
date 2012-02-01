@@ -13,7 +13,7 @@ class Lity_Router
 	 * @var $_params
 	 */
 	private $_params = array();
-	
+
 	/**
 	 * @var $_routes
 	 */
@@ -21,7 +21,7 @@ class Lity_Router
 
 	/**
 	 * @var $_url_replacement
-	 */	
+	 */
 	private $_url_replacement = array(
 									0 => array("*"),
 									1 => array("[a-zA-Z0-9_]+")
@@ -35,15 +35,15 @@ class Lity_Router
 	{
 		// Get current version
 		$version = (int)filemtime(ABSPATH.'app/config/Routes.php');
-				
+
 		// Load cache
 		if (!$this->_restore_from_cache($version)) {
-			
+
 			require_once(ABSPATH.'app/config/Routes.php');
 			$this->_save_to_cache($version);
-			
+
 		}
-		
+
 	} // __construct()
 
 	/**
@@ -52,46 +52,46 @@ class Lity_Router
 	 * @todo use default cache with namespace
 	 * @param string $version version number (ex: 1.2)
 	 * @return bool
-	 * 
+	 *
 	 */
 	private function _restore_from_cache($version)
 	{
 		$route_file = ABSPATH.'cache/routes.'.$version;
-		
+
 		if (file_exists($route_file)) {
-			
+
 			ob_start();
 			include($route_file);
 			$routes = ob_get_contents();
 			ob_end_clean();
 
 			$routes = @unserialize($routes);
-			
+
 			if (is_array($routes)) {
 				$this->_routes = $routes;
 				return true;
 			}
-			
+
 		}
 
 		return false;
 
 	} // _restore_from_cache()
-	
+
 	/**
 	 * Save routes to cache
-	 * 
+	 *
 	 * @param  string    $version version number (ex: 1.2)
 	 * @throws Exception Unable to open file for writing
 	 */
 	private function _save_to_cache($version)
 	{
 		$route_file = ABSPATH.'cache/routes.'.$version;
-		
+
 		if (!@file_put_contents($route_file, serialize($this->_routes))) {
 			throw new Exception('Unable to open '.$route_file.' for writing');
 		}
-		
+
 	} // _save_to_cache()
 
 	/**
@@ -114,7 +114,7 @@ class Lity_Router
 
 		// build the regular expression..
 		foreach ($routeex as $rk => $rv) {
-			
+
 	    if ($rv != "" && $rv{0} == ":") {
 				// :id, :method, etc
 				if (strstr($rv, "(number)")) {
@@ -213,26 +213,26 @@ class Lity_Router
 		foreach ($urlparams as $upk => $upv) {
 	    app()->route[$upk] = strtolower($upv);
 		}
-		
+
 	} // dispatch()
 
 	/**
 	 * Get routes
-	 * 
+	 *
 	 * @return array routes
-	 * 
+	 *
 	 */
 	public function get_routes()
 	{
 		return $this->_routes;
-		
+
 	} // get_routes()
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
-	
+
 	protected static $_instance = null;
 
 	public static function get_instance()
@@ -240,9 +240,9 @@ class Lity_Router
 		if (self::$_instance == null) {
 	    self::$_instance = new self();
 		}
-		
+
 		return self::$_instance;
-		
+
 	} // get_instance()
 
 } // Lity_Router

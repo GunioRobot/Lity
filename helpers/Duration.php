@@ -2,10 +2,10 @@
 
 /**
  * Duration
- * 
+ *
  * @author  Wibeset <support@wibeset.com>
  * @package helpers
- * 
+ *
  */
 
 class Lity_Helper_Duration
@@ -15,7 +15,7 @@ class Lity_Helper_Duration
 	 *
 	 * @param  int   $seconds Number of seconds to be parsed
 	 * @return mixed An array containing named segments
-	 * 
+	 *
 	 */
 	public function duration($seconds, $periods = null)
 	{
@@ -35,7 +35,7 @@ class Lity_Helper_Duration
 		// Loop
 		$seconds = (float) $seconds;
 		foreach ($periods as $period => $value) {
-			
+
 			$count = floor($seconds / $value);
 
 			if ($count == 0) {
@@ -52,22 +52,22 @@ class Lity_Helper_Duration
 		}
 
 		return $values;
-		
+
 	} // duration()
 
 	/**
    * Return a string of time periods.
    *
-   * @param  int    $duration 
+   * @param  int    $duration
 	 * @return string
-	 * 
+	 *
 	 */
 	public function in_words($duration)
 	{
 		$duration = $this->duration($duration);
 
 		foreach ($duration as $key => $value) {
-			
+
 			$segment_name = substr($key, 0, -1);
 			$segment = $value . ' ' . $segment_name;
 
@@ -80,7 +80,7 @@ class Lity_Helper_Duration
 		}
 
 		return implode(' ', $words);
-		
+
 	} // in_words()
 
 } // Lity_Helper_Duration
